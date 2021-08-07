@@ -35,6 +35,6 @@ if "!Filled!"=="true" (
 )
 echo.
 echo   !green!Success: !grey!GTA 5 Tools Has Been Successfully Installed.
-pause >nul
-start "GTA 5 Tools ^| Setting up" "!DESKTOP_PATH!\GTA 5 Tools"
+ping localhost -n 5 >nul
+start "GTA 5 Tools ^| Setting up" "!DESKTOP!\GTA 5 Tools"
 exit /b
