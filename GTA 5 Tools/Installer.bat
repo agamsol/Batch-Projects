@@ -1,7 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 chcp 65001 >nul
+for /f "usebackq tokens=1,2,*" %%B IN (`reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop`) do call set DESKTOP=%%D
 title GTA 5 Tools ^| Installer Wizard
+
 set "el=bgbrightred=[101m,bgblack=[40m,bgyellow=[43m,black=[30m,red=[31m,green=[32m,yellow=[33m,blue=[34m,magenta=[35m,cyan=[36m,white=[37m,grey=[90m,brightred=[91m,brightgreen=[92m,brightyellow=[93m,brightblue=[94m,brightmagenta=[95m,brightcyan=[96m,brightwhite=[97m,underline=[4m,underlineoff=[24m"
 set "%el:,=" && set "%"
 set "WorkingPath=!appdata!\GTA 5 Tools"
@@ -21,10 +23,8 @@ for %%a in (!db!) do (
     set Filled=true
     )
 )
-
-if "!Filled!"=="true" (
-    for /f "usebackq tokens=3*" %%D IN (`reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop`) do set DESKTOP_PATH=%%D
-    cscript "!WorkingPath!\Lib\Shortcuts.vbs" "!DESKTOP_PATH!\GTA 5 Tools" "!appdata!\GTA 5 Tools\GTA 5 Tools.bat" "%~dp0\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
+if "!Filled!"=="true" (  
+    cscript "!WorkingPath!\Lib\Shortcuts.vbs" "!DESKTOP!\GTA 5 Tools" "!appdata!\GTA 5 Tools\GTA 5 Tools.bat" "!WorkingPath!\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
 ) else (
     echo.
     echo   !yellow!WARNING: !grey!GTA 5 Tools Already Installed.
