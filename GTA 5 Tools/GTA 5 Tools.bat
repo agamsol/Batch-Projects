@@ -12,7 +12,7 @@ set db="GTA%%205%%20Tools.ico" "Shortcuts.vbs" "pssuspend.exe" "youtube-dl.exe" 
 for %%a in (!db!) do if not exist "!WorkingPath!\Lib\%%~a" (
     set /a MissingFiles+=1
     )
-for %%a in (!db!) do if not exist "!appdata!\Lib\%%~a" (
+for %%a in (!db!) do if not exist "!WorkingPath!\Lib\%%~a" (
 set /a File+=1
 cls
 echo.
@@ -20,13 +20,13 @@ echo   !green!√ !grey!Downloading Files !File!/!MissingFiles!
 set el=%%~a
 set temp.elpath=!EL:%%20= !
 set el=!el:\=/!
->nul curl --create-dirs -#fkLo "!appdata!Lib\!temp.elpath!" "https://github.com/agamsol/Batch-Projects/raw/main/GTA%%205%%20Tools/Lib/!el!"
+>nul curl --create-dirs -#fkLo "!WorkingPath!\Lib\!temp.elpath!" "https://github.com/agamsol/Batch-Projects/raw/main/GTA%%205%%20Tools/Lib/!el!"
 set Filled=true
 )
 @echo on
 if "!Filled!"=="true" (
     for /f "usebackq tokens=3*" %%D IN (`reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop`) do set DESKTOP_PATH=%%D
-    cscript "Lib\Shortcuts.vbs" "!DESKTOP_PATH!\GTA 5 Tools" "!appdata!\GTA 5 Tools\Actions.bat" "%~dp0\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
+    cscript "!WorkingPath!\Lib\Shortcuts.vbs" "!DESKTOP_PATH!\GTA 5 Tools" "!appdata!\GTA 5 Tools\Actions.bat" "%~dp0\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
 )
 
 :: <Main Selection Menu>
@@ -66,14 +66,14 @@ goto:MAIN_MENU
      goto:MAIN_MENU
  )
  echo  !grey!INFO: Suspending Connection . . .
- call "Lib\pssuspend.exe" GTA5.exe >nul 2>&1
+ call "!WorkingPath!\Lib\pssuspend.exe" GTA5.exe >nul 2>&1
  ping localhost -n 2 >nul
  echo.
  echo  !grey!INFO: Waiting !cyan!10 !grey!seconds
  ping localhost -n 10 >nul
  echo.
  echo  !grey!INFO: Resuming Connection . . .
- call "Lib\pssuspend.exe" GTA5.exe -r >nul 2>&1
+ call "!WorkingPath!\Lib\pssuspend.exe" GTA5.exe -r >nul 2>&1
  ping localhost -n 3 >nul
  echo.
  echo  !brightgreen!INFO: !grey!Connection resumed, Solo-Public Session generated.
@@ -132,7 +132,7 @@ goto:Music_MENU
  echo.
  set /p "YoutubeURL=!magenta!--> !grey!"
  echo.
- for /f "delims=" %%a in ('call "Lib\youtube-dl.exe" --no-playlist -e "!YoutubeURL!" 2^>nul') do set "SongName=%%a"
+ for /f "delims=" %%a in ('call "!WorkingPath!\Lib\youtube-dl.exe" --no-playlist -e "!YoutubeURL!" 2^>nul') do set "SongName=%%a"
  if not defined SongName (
      echo   !brightred!ERROR: !grey!Song URL not found.
      ping localhost -n 4 >nul
@@ -161,7 +161,7 @@ goto:Music_MENU
      ping localhost -n 4 >nul
      goto:Music_AddTrack
  )
- call "Lib\youtube-dl.exe" --no-playlist --extract-audio --audio-format mp3 -o "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.mp3" --ffmpeg-location "Lib\ffmpeg\bin" "!YoutubeURL!" >nul
+ call "!WorkingPath!\Lib\youtube-dl.exe" --no-playlist --extract-audio --audio-format mp3 -o "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.mp3" --ffmpeg-location "!WorkingPath!\Lib\ffmpeg\bin" "!YoutubeURL!" >nul
  echo   !brightgreen!Success!grey!, The Track "!SongName.FileNameValidator!" Has been added.
  ping localhost -n 4 >nul
  goto:Music_MENU
