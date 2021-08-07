@@ -17,11 +17,9 @@ echo.
 echo   !green!√ !grey!Downloading Files !File!/!MissingFiles!
 set el=%%~a
 set el=!el:\=/!
-set el=!el: =%%20!
->nul curl --create-dirs -#fkLo "!WorkingPath!\Lib\!temp.elpath!" "https://github.com/agamsol/Batch-Projects/raw/main/GTA%%205%%20Tools/Lib/!el!"
+>nul curl --create-dirs -#fkLo "!WorkingPath!\Lib\%%~a" "https://github.com/agamsol/Batch-Projects/raw/main/GTA%%205%%20Tools/Lib/!el: =%%20!?raw=true"
 set Filled=true
 )
-
 if "!Filled!"=="true" (
     for /f "usebackq tokens=3*" %%D IN (`reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop`) do set DESKTOP_PATH=%%D
     cscript "!WorkingPath!\Lib\Shortcuts.vbs" "!DESKTOP_PATH!\GTA 5 Tools" "!appdata!\GTA 5 Tools\Actions.bat" "%~dp0\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
@@ -86,7 +84,7 @@ goto:MAIN_MENU
 :Music_MENU
 title GTA 5 Tools ^| Self Radio
 set Tracks.count=0
-for /f "delims=" %%a in ('dir /b "!docsdir!\Rockstar Games\GTA V\User Music\*.mp3"2^>nul') do (
+for /f "delims=" %%a in ('dir /b "!docsdir!\Rockstar Games\GTA V\User Music\*.m4a"2^>nul') do (
     set /a Tracks.count+=1
 )
 set "Tracks.count.menu=!Tracks.count!             "
@@ -155,7 +153,7 @@ goto:Music_MENU
  set "SongName.FileNameValidator=!el:~1!"
  set SongName.FileNameValidator=!SongName.FileNameValidator:"=!
  set SongName.FileNameValidator=!SongName.FileNameValidator:?=!
- if exist "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.mp3" (
+ if exist "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.m4a" (
      echo   !yellow!WARNING: !grey!Song Already Exists.
      ping localhost -n 4 >nul
      goto:Music_AddTrack
@@ -174,13 +172,13 @@ goto:Music_MENU
  title GTA 5 Tools ^| Delete a track
  cls
  echo.
- echo   !yellow!WARNING: !grey!You are about to delete the track "!brightred!!Userinput.TrackSelection!!grey!"
+ echo   !yellow!WARNING: !grey!You are about to delete the track "!brightred!!Userinput.TrackSelection:~,-4!!grey!"
  echo          Please type "!brightgreen!confirm!grey!" to delete the track.
  echo.
  set /p "Userinput.ConfirmDeletion=!magenta!--> !brightgreen!"
  echo.
  if /i "!Userinput.ConfirmDeletion!"=="confirm" (
-     del /q "!docsdir!\Rockstar Games\GTA V\User Music\!Track.ID[%Userinput.TrackSelection%]!"
+     del /q "!docsdir!\Rockstar Games\GTA V\User Music\!Userinput.TrackSelection!"
      echo   !brightgreen!Success!grey!, The Track "!brightred!!Userinput.TrackSelection!!grey!" Has been deleted.
      ping localhost -n 7 >nul
      goto:Music_MENU
@@ -213,7 +211,7 @@ goto:Music_MENU
      echo   !grey!What's the new name for your track?
      echo.
      set /p "Userinput.RenameTrack=!magenta!--> !grey!"
-     rename "!docsdir!\Rockstar Games\GTA V\User Music\!Userinput.TrackSelection!" "!Userinput.RenameTrack!.mp3"
+     rename "!docsdir!\Rockstar Games\GTA V\User Music\!Userinput.TrackSelection!" "!Userinput.RenameTrack!.m4a"
      echo.
      echo   !green!Success!grey!, The Track's new name is !brightblue!!Userinput.RenameTrack!!grey!.
      ping localhost -n 7 >nul
@@ -230,7 +228,7 @@ goto:Music_MENU
  for /f "delims=" %%a in ('set "Track.ID[" 2^>nul') do set "%%a]="
  set Tracks.count=0
  set Tracks.count.menu=0
- for /f "delims=" %%a in ('dir /b "!docsdir!\Rockstar Games\GTA V\User Music\*.mp3"2^>nul') do set /a Tracks.count+=1
+ for /f "delims=" %%a in ('dir /b "!docsdir!\Rockstar Games\GTA V\User Music\*.m4a"2^>nul') do set /a Tracks.count+=1
  if !Tracks.count! equ 0 (
      echo.
      echo   !brightred!ERROR: !grey!No tracks to display.
@@ -245,7 +243,7 @@ goto:Music_MENU
  echo           //  !white!█!bgbrightred! !black!TRACKS LIST !bgblack!!white!█  !brightblue!\\
  echo    ╔═════════════════════════════════════════════════════════════╗
  echo    ║                                                             ║
- for /f "delims=" %%a in ('dir /b "!docsdir!\Rockstar Games\GTA V\User Music\*.mp3"2^>nul') do (
+ for /f "delims=" %%a in ('dir /b "!docsdir!\Rockstar Games\GTA V\User Music\*.m4a"2^>nul') do (
      set "Track.current.menu=%%~Na                                                                  "
      set /a Tracks.count+=1
      if !Tracks.count! lss 10 set "Tracks.count= !Tracks.count!"
