@@ -8,25 +8,25 @@ if not exist "!docsdir!\Rockstar Games\GTA V\User Music" md "!docsdir!\Rockstar 
 set "WorkingPath=!appdata!\GTA 5 Tools"
 
 set File= & set MissingFiles= & set Filled=
-set db="GTA%%205%%20Tools.ico" "Shortcuts.vbs" "pssuspend.exe" "youtube-dl.exe" "ffmpeg\bin\ffmpeg.exe" "ffmpeg\bin\ffprobe.exe" "ffmpeg\bin\ffplay.exe"
-for %%a in (!db!) do if not exist "!WorkingPath!\Lib\%%~a" (
-    set /a MissingFiles+=1
-    )
+set db="GTA 5 Tools.ico" "Shortcuts.vbs" "pssuspend.exe" "youtube-dl.exe" "ffmpeg\bin\ffmpeg.exe" "ffmpeg\bin\ffprobe.exe" "ffmpeg\bin\ffplay.exe"
+for %%a in (!db!) do if not exist "!WorkingPath!\Lib\%%~a" set /a MissingFiles+=1
 for %%a in (!db!) do if not exist "!WorkingPath!\Lib\%%~a" (
 set /a File+=1
 cls
 echo.
 echo   !green!√ !grey!Downloading Files !File!/!MissingFiles!
 set el=%%~a
-set temp.elpath=!EL:%%20= !
 set el=!el:\=/!
+set el=!el: =%%20!
 >nul curl --create-dirs -#fkLo "!WorkingPath!\Lib\!temp.elpath!" "https://github.com/agamsol/Batch-Projects/raw/main/GTA%%205%%20Tools/Lib/!el!"
 set Filled=true
 )
+
 if "!Filled!"=="true" (
     for /f "usebackq tokens=3*" %%D IN (`reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop`) do set DESKTOP_PATH=%%D
     cscript "!WorkingPath!\Lib\Shortcuts.vbs" "!DESKTOP_PATH!\GTA 5 Tools" "!appdata!\GTA 5 Tools\Actions.bat" "%~dp0\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
 )
+
 
 :: <Main Selection Menu>
 :MAIN_MENU
@@ -159,7 +159,7 @@ goto:Music_MENU
      ping localhost -n 4 >nul
      goto:Music_AddTrack
  )
- call "!WorkingPath!\Lib\youtube-dl.exe" --no-playlist --extract-audio --audio-format mp3 -o "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.mp3" --ffmpeg-location "!WorkingPath!\Lib\ffmpeg\bin" "!YoutubeURL!" >nul
+ call "!WorkingPath!\Lib\youtube-dl.exe" --no-playlist --extract-audio --audio-format m4a -o "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.m4a" --ffmpeg-location "!WorkingPath!\Lib\ffmpeg\bin" "!YoutubeURL!" >nul
  echo   !brightgreen!Success!grey!, The Track "!SongName.FileNameValidator!" Has been added.
  ping localhost -n 4 >nul
  goto:Music_MENU
@@ -275,7 +275,7 @@ goto:Music_MENU
 :: <GTA Running>
 :GTA_STATUS
  set IS.RUNNING.GTA=false
- tasklist /FI "IMAGENAME eq GTA5.exe.exe" 2>NUL | find /I /N "GTA5.exe">NUL
+ tasklist /FI "IMAGENAME eq GTA5.exe" 2>NUL | find /I /N "GTA5.exe">NUL
  if "%ERRORLEVEL%"=="0" set IS.RUNNING.GTA=true
  goto:eof
 :: </GTA Running>
