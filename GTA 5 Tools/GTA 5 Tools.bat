@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 chcp 65001 >nul
 set "el=bgbrightred=[101m,bgblack=[40m,bgyellow=[43m,black=[30m,red=[31m,green=[32m,yellow=[33m,blue=[34m,magenta=[35m,cyan=[36m,white=[37m,grey=[90m,brightred=[91m,brightgreen=[92m,brightyellow=[93m,brightblue=[94m,brightmagenta=[95m,brightcyan=[96m,brightwhite=[97m,underline=[4m,underlineoff=[24m"
 set "%el:,=" && set "%"
-FOR /F "tokens=3 delims= " %%G in ('reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal"') do set docsdir=%%G
+FOR /F "tokens=3 delims= " %%G in ('reg query "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal"') do call set docsdir=%%G
 if not exist "!docsdir!\Rockstar Games\GTA V\User Music" md "!docsdir!\Rockstar Games\GTA V\User Music"
 set "WorkingPath=!appdata!\GTA 5 Tools"
 
@@ -27,6 +27,7 @@ if "!Filled!"=="true" (
     cscript "!WorkingPath!\Lib\Shortcuts.vbs" "!DESKTOP_PATH!\GTA 5 Tools" "!appdata!\GTA 5 Tools\Actions.bat" "%~dp0\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
 )
 
+if /i "%~1"=="Solo-Public" goto:SoloPublicSession
 
 :: <Main Selection Menu>
 :MAIN_MENU
@@ -159,7 +160,7 @@ goto:Music_MENU
      ping localhost -n 4 >nul
      goto:Music_AddTrack
  )
- call "!WorkingPath!\Lib\youtube-dl.exe" --no-playlist --extract-audio --audio-format m4a -o "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.m4a" --ffmpeg-location "!WorkingPath!\Lib\ffmpeg\bin" "!YoutubeURL!" >nul
+ call "!WorkingPath!\Lib\youtube-dl.exe" --no-playlist --extract-audio --audio-format m4a -o "!docsdir!\Rockstar Games\GTA V\User Music\!SongName.FileNameValidator!.%(ext)s" --ffmpeg-location "!WorkingPath!\Lib\ffmpeg\bin" "!YoutubeURL!" >nul
  echo   !brightgreen!Success!grey!, The Track "!SongName.FileNameValidator!" Has been added.
  ping localhost -n 4 >nul
  goto:Music_MENU
