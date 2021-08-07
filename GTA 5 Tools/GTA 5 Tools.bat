@@ -23,7 +23,6 @@ set el=!el:\=/!
 >nul curl --create-dirs -#fkLo "!WorkingPath!\Lib\!temp.elpath!" "https://github.com/agamsol/Batch-Projects/raw/main/GTA%%205%%20Tools/Lib/!el!"
 set Filled=true
 )
-@echo on
 if "!Filled!"=="true" (
     for /f "usebackq tokens=3*" %%D IN (`reg query "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v Desktop`) do set DESKTOP_PATH=%%D
     cscript "!WorkingPath!\Lib\Shortcuts.vbs" "!DESKTOP_PATH!\GTA 5 Tools" "!appdata!\GTA 5 Tools\Actions.bat" "%~dp0\Lib\GTA 5 Tools.ico, 0" >nul 2>&1
@@ -121,7 +120,6 @@ echo   !brightred!ERROR: !grey!Invalid Option selected.
 ping localhost -n 4 >nul
 goto:Music_MENU
 :: </Music Selection Menu>
-
 
 :: <Add New Track>
 :Music_AddTrack
