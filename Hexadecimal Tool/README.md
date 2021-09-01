@@ -11,11 +11,11 @@
 
 - 1️⃣
 
-Command: `call "Hexadecimal Tool.bat" --plain-to-hex "Hello World"`
+     Command: `call "Hexadecimal Tool.bat" --plain-to-hex "Hello World"`
 
-Output: `48656c6c6f20576f726c640d0a`
+     Output: `48656c6c6f20576f726c640d0a`
 - 2️⃣
 
-Command: `call "Hexadecimal Tool.bat" --hex-to-plain "48656c6c6f20576f726c640d0a"`
+     Command: `call "Hexadecimal Tool.bat" --hex-to-plain "48656c6c6f20576f726c640d0a"`
 
-Output: `Hello World`
+     Output: `Hello World`
