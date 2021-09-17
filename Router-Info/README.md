@@ -32,4 +32,4 @@ __Websites__
 - https://vpnapi.io/
 - http://ip-api.com/
 
-##### Discord Server for Questions And Support | <a href="Agam's Discord Server"><img src="https://discord.com/api/guilds/847314160944939008/widget.png" alt="Agam's Discord Server"/></a>
+##### Discord Server for Questions And Support | <a href="https://discord.gg/eQgMsakced"><img src="https://discord.com/api/guilds/847314160944939008/widget.png" alt="Agam's Discord Server"/></a>
