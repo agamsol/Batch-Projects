@@ -4,7 +4,12 @@
 - Detection of VPN / Proxy
 
 # <Screenshots Here>
+![ScreenShot](https://i.imgur.com/DkhLObD.png)
+![ScreenShot](https://i.imgur.com/eWLKeYD.png)
+![ScreenShot](https://i.imgur.com/FMcItlH.png)
 
+
+  
 ## 🎯 Install & Setup
 - Download and open the [Installer](<URL>) **(**[Click this to view what you are downloading](<SCRIPT_VIEW_LINK>)**)**
 **OR**
