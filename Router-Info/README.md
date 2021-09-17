@@ -8,10 +8,8 @@
 ![ScreenShot](https://i.imgur.com/eWLKeYD.png)
 ![ScreenShot](https://i.imgur.com/FMcItlH.png)
 
-
-  
 ## 🎯 Install & Setup
-- Download and open the [Installer](<URL>) **(**[Click this to view what you are downloading](<SCRIPT_VIEW_LINK>)**)**
+- Download and open the [Installer](https://raw.githubusercontent.com/agamsol/Batch-Projects/main/Router-Info/installer.cmd) **(**[Click this to view what you are downloading](https://github.com/agamsol/Batch-Projects/raw/main/Router-Info/installer.cmd)**)**
 **OR**
 - Download the Main Source and move it to:
 `%localappdata%\Microsoft\WindowsApps`
