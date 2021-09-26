@@ -6,10 +6,10 @@
 
 |🎦 Project | Latest | Support Maintained | BETA | Stable Leveling |
 |--|--|--|--|--|
-| [GTA 5 Tools](https://github.com/agamsol/Batch-Projects/tree/main/GTA%205%20Tools) | 1.0.0 | ✅ Yes (as of 09.07.2021) | ✅ | 7️/10 |
-| [Local Network PC Status](https://github.com/agamsol/Batch-Projects/tree/main/Local%20Network%20Computer%20Status) | 1.0.0 | ✅ Yes (as of 09.07.2021) | ✅ | 7/10 |
-| [Hexadecimal Tool](https://github.com/agamsol/Batch-Projects/tree/main/Hexadecimal%20Tool) | 1.0.0 | ✅ Yes (as of 09.07.2021) | ✅ | 8/10 | 
-| [Router Info (Custom Command)](https://github.com/agamsol/Batch-Projects/tree/main/Router-Info) | 1.0.0 | ✅ Yes (as of 09.07.2021) | ❌ | 10/10 |
+| [GTA 5 Tools](https://github.com/agamsol/Batch-Projects/tree/main/GTA%205%20Tools) | 1.0.0 | ✅ Yes (as of 07.09.2021) | ✅ | 7️/10 |
+| [Local Network PC Status](https://github.com/agamsol/Batch-Projects/tree/main/Local%20Network%20Computer%20Status) | 1.0.0 | ✅ Yes (as of 26.09.2021) | ✅ | 6/10 |
+| [Hexadecimal Tool](https://github.com/agamsol/Batch-Projects/tree/main/Hexadecimal%20Tool) | 1.0.0 | ✅ Yes (as of 07.09.2021) | ✅ | 8/10 | 
+| [Router Info (Custom Command)](https://github.com/agamsol/Batch-Projects/tree/main/Router-Info) | 1.0.0 | ✅ Yes (as of 07.09.2021) | ❌ | 10/10 |
 
 - **Stable Leveling:** The Rank for each project from 1/10 for being stable
 
