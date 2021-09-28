@@ -10,7 +10,7 @@
 | [Local Network PC Status](https://github.com/agamsol/Batch-Projects/tree/main/Local%20Network%20Computer%20Status) | 1.0.0 | ✅ Yes (as of 26.09.2021) | ✅ | 6/10 |
 | [Hexadecimal Tool](https://github.com/agamsol/Batch-Projects/tree/main/Hexadecimal%20Tool) | 1.0.0 | ✅ Yes (as of 07.09.2021) | ✅ | 8/10 | 
 | [Router Info (Custom Command)](https://github.com/agamsol/Batch-Projects/tree/main/Router-Info) | 1.0.0 | ✅ Yes (as of 07.09.2021) | ❌ | 10/10 |
-
+| [Discord-Message-Sender](https://github.com/agamsol/Batch-Projects/tree/main/Discord-Message-Sender) | 2.0 | ✅ Yes (as of 28.09.2021) | ❌ no | 10/10 |
 - **Stable Leveling:** The Rank for each project from 1/10 for being stable
 
 #### 📬 For any questions, Support or bug fixes feel free to join my discord server 
