@@ -9,7 +9,7 @@ set "APPNAME=DiscordMsgPRO"
 set version=2.0
 
 :: Check for updates
-for /f %%A in ('curl --silent "https://raw.githubusercontent.com/agamsol/Quick-Message-Sender/main/Premium/Premium_Updates.txt"') do set lastversion=%%A
+for /f %%A in ('curl --silent "https://raw.githubusercontent.com/agamsol/Batch-Projects/main/Discord-Message-Sender/latest.inf"') do set lastversion=%%A
 
 :: Check Detail
 set "Silent=%~1"
