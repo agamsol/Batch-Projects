@@ -48,4 +48,4 @@
 ## 💬 Any other Questions?
 > **Feel Free to join my Discord Server for support**
 
-><a href="https://discord.gg/GFvXSwZ" rel="Discord Server">![Server](https://img.shields.io/discord/847289537566474250.svg?label=Discord&amp;colorB=7289DA)</a>
+><a href="https://discord.gg/DbyjxpqE3R" rel="Discord Server">![Server](https://img.shields.io/discord/847289537566474250.svg?label=Discord&amp;colorB=7289DA)</a>
