@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run """" & "AudioVB.bat" , 0
