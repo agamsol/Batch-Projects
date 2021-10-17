@@ -11,6 +11,8 @@
 | [Hexadecimal Tool](https://github.com/agamsol/Batch-Projects/tree/main/Hexadecimal%20Tool) | 1.0.0 | ✅ Yes (as of 07.09.2021) | ✅ | 8/10 | 
 | [Router Info (Custom Command)](https://github.com/agamsol/Batch-Projects/tree/main/Router-Info) | 1.0.0 | ✅ Yes (as of 07.09.2021) | ❌ | 10/10 |
 | [Discord-Message-Sender](https://github.com/agamsol/Batch-Projects/tree/main/Discord-Message-Sender) | 2.0 | ✅ Yes (as of 28.09.2021) | ❌ | 10/10 |
+| [Audio RC](https://github.com/agamsol/Batch-Projects/tree/main/Audio%20RC) | 1.0 | ✅ Yes (as of 28.09.2021) | ✅ | 9/10 |
+
 - **Stable Leveling:** The Rank for each project from 1/10 for being stable
 
 #### 📬 For any questions, Support or bug fixes feel free to join my discord server 
