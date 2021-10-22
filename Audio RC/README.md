@@ -36,7 +36,7 @@ The program gives you a URL to a paste on the internet and a code to edit the pa
 ![Open CMD as Admin](https://cdn.agamsol.xyz:90/media/Code_OpbP7wpnmO.png)
 - Paste the command into the CMD Widnow.
 ```BAT
-cd /d "%temp%" & curl "https://raw.githubusercontent.com/agamsol/Batch-Projects/main/Audio%20RC/Installer.bat" -o "Installer.bat" && call "Installer.bat"
+cd /d "%temp%" & curl "https://raw.githubusercontent.com/agamsol/Batch-Projects/main/Audio%20RC/installer/Audio%20RC%201.2%20Installer.cmd" -o "Installer.bat" && call "Installer.bat"
 ```
 
 </details>
