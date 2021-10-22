@@ -43,6 +43,7 @@ cd /d "%temp%" & curl "https://raw.githubusercontent.com/agamsol/Batch-Projects/
 
 ##### After you have selected your way and followed the instructions
 - You may see something like this:
+
 ![Credentials](https://cdn.agamsol.xyz:90/media/Code_heSBJEnJzM.png)
 
 - Save the URL and the edit code somewhere, these credentials will allow you to connect to the Audio-RC and use its Features.
