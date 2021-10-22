@@ -9,7 +9,7 @@ The program gives you a URL to a paste on the internet and a code to edit the pa
 
   ⚠ **NOTE: All these features are running in background**
 
-### 🎉 What's new in version 2.1
+### 🎉 What's new in version 1.2
 - Windows 7 Support
 - Bug improvements in the main script and installer
 
