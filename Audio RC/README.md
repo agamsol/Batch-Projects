@@ -183,3 +183,4 @@ STOP_SOUNDS=true
 - Add an option to set the voice reading rate for TTS
 - Set the volume to the preferd amount in the config for (in case the target computer is muted)
 - Add a file logging feature
+- the installer should install vcredist using the `/q` flag but atm people need to download it manually -_-
