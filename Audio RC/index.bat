@@ -1,14 +1,21 @@
 @echo off
 setlocal enabledelayedexpansion
 
+REM index.bat version : 2.1
+
 :: <Settings>
+set "GithubRepo=https://raw.githubusercontent.com/agamsol/Batch-Projects/main/Audio%%20RC"
+set "MainProgramPath=%appdata%\Audio RC"
 set "SettingsFile=config.inf"
 set "WebSettings=WebSettings.txt"
 set "DefaultCreationCode=1234"
 set "DefaultTTSVoice=David"
 set "DefaultTTSVolume=70"
-set "Files="Audio.vbs" "TTS.vbs" "youtube-dl.exe" "ffmpeg" "rentry.exe""
-:: Scan Chnage each (seconds)
+set "Files="Audio.vbs" "TTS.vbs" "youtube-dl.exe" "ffmpeg" "rentry.exe" "curl.exe""
+set "FileRequirements="Audio.vbs" "TTS.vbs" "rentry.exe" "youtube-dl.exe" "curl.exe" "ffmpeg\ffmpeg.exe" "ffmpeg\ffprobe.exe" "ffmpeg\ffplay.exe""
+:: </Settings>
+
+REM Scan for enabled features each number of seconds
 set "ScanTimeout=10"
 
 :: <Prepare>
@@ -20,7 +27,32 @@ if not exist Youtube-Sounds md Youtube-Sounds
 call :getPID ownPID
 :: </Prepare>
 
-:: set /a ScanTimeout*=60
+:: <Get OS Running>
+for /f "tokens=4-5 delims=. " %%i in ('ver') do if "%%i.%%j"=="6.1" (set "CurrentOS=7") else (set "CurrentOS=10")
+if !CurrentOS! equ 10 (
+    set "TTSLoaderNoVal="TTS" "TTS_SPEAK" "TTS_VOICE" "TTS_VOLUME""
+    set "TTSLoader="TTS=false" "TTS_SPEAK=Something to say" "TTS_VOICE=David" "TTS_VOLUME=100""
+)
+:: </Get OS Running>
+
+:: <Download Missing Files>
+for %%a in (!FileRequirements!) do if not exist "bin\%%a" set /a MissingFiles+=1
+if !MissingFiles! geq 1 (
+    echo.
+    echo  Preparing to download missing files . . .
+)
+
+for %%a in (!FileRequirements!) do (
+    set File=%%~a
+    if not exist "!MainProgramPath!\bin\%%~a" (
+        echo.
+        echo  INFO: Downloading File: '%%~a'
+        set "FileURL=!File:\=/!"
+        chcp 437 > nul
+        "!File[6]!" --create-dirs -#fkLo "!MainProgramPath!\bin\!File!" "!GithubRepo!/bin/!FileURL!"
+    )
+)
+
 :: <Load Config + WebSettings>
 if not exist "!SettingsFile!" call :CREATE_SETTINGS new
 call :LoadLocalConfig
@@ -30,7 +62,7 @@ call :LoadPasteSettings
 title  Listening - !Webpage:/raw=!
 cls
 echo.
-echo   Session is running: !Webpage:/raw=!
+echo   Session has started: !Webpage:/raw=!
 echo      Edit Code: !DefaultCode!
 
 :: <Loop>
@@ -122,6 +154,7 @@ if !ErrorLevel! equ 0 (
     call :LoadPasteSettings
     if /i "!STOP_SOUNDS!"=="true" (
         set STOP_SOUNDS=false
+        echo.
         echo  Request to stop sound accepted.
         taskkill /f /pid "!AudioPID!" >nul 2>&1
     )
@@ -129,7 +162,7 @@ if !ErrorLevel! equ 0 (
     set YOUTUBE=false
     set STOP_SOUNDS=false
     call :CREATE_SETTINGS "edit"
-    echo Audio Has finished playing.
+    echo  Audio Has finished playing.
     ping localhost -n 5 >nul
     exit /b
 )
@@ -141,8 +174,8 @@ goto :SongRunning
 :LoadPasteSettings
 call :CHECK_CONNECTION
 call :GetPasteStatus
-for %%a in ("TTS" "TTS_SPEAK" "TTS_VOICE" "TTS_VOLUME" "YOUTUBE" "YOUTUBE_URI" "STOP_SOUNDS") do set %%~a=
-for /F "delims=" %%a in ('curl -s !Webpage!') do (
+for %%a in (!TTSLoaderNoVal! "YOUTUBE" "YOUTUBE_URI" "STOP_SOUNDS") do set %%~a=
+for /F "delims=" %%a in ('call "!file[6]!" -k -s !Webpage!') do (
    <nul set /p="%%a" | >nul findstr /rc:";" || set "%%a"
 )
 exit /b
@@ -150,9 +183,11 @@ exit /b
 :CREATE_SETTINGS
 call :CHECK_CONNECTION
 if not exist "!SettingsFile!" (
-    for %%a in ("TTS=false" "TTS_SPEAK=Something to say" "TTS_VOICE=David" "TTS_VOLUME=100" "YOUTUBE=false" "YOUTUBE_URI=URL" "STOP_SOUNDS=false") do set "%%~a"
+    for %%a in (!TTSLoader! "YOUTUBE=false" "YOUTUBE_URI=URL" "STOP_SOUNDS=false") do set "%%~a"
 )
->"!WebSettings!" (
+
+if !CurrentOS! equ 10 (
+    >"!WebSettings!" (
     echo ; if you want to play TTS enable TTS, You can also choose what it will say. ^(under TTS_SPEAK^)
     echo ; TTS Supported voices: David, Zira
     echo ; TTS Volume: 1 - 100
@@ -161,16 +196,24 @@ if not exist "!SettingsFile!" (
     echo TTS_VOICE=!TTS_VOICE!
     echo TTS_VOLUME=!TTS_VOLUME!
     echo.
+    )
+) else >"!WebSettings!" echo ; Since you are using windows 7 TTS feature is disabled for you.
+>>"!WebSettings!" (
     echo ; if you want to play YouTube Music enable YOUTUBE, under "YOUTUBE_URI" provide the youtube URL
     echo YOUTUBE=!YOUTUBE!
     echo YOUTUBE_URI=!YOUTUBE_URI!
     echo.
-    echo ; if both are enabled the program will only read TTS.
-    echo ; if both are disabled the script will do continue listening for change.
-    echo.
     echo ; if you asked the computer to play sounds you can stop them by changing this to true.
     echo STOP_SOUNDS=!STOP_SOUNDS!
 )
+if !CurrentOS! equ 10 (
+    >>"!WebSettings!" (
+        echo.
+        echo ; if both modes are enabled the program will only read TTS and then youtube
+        echo ; if both modes are disabled the script will do continue listening for change.
+    )
+)
+
 set "EditMode=%~1"
 if "!EditMode!"=="new" (
     set "APIRequest=call !File[5]! --edit-code !DefaultCreationCode! new"
@@ -201,7 +244,7 @@ if !ErrorLevel! equ 1 (
 exit /b
 
 :GetPasteStatus
-for /f "tokens=*" %%a in ('curl -s !Webpage!') do if "%%a"=="<!DOCTYPE html>" (
+for /f "tokens=*" %%a in ('call "!file[6]!" -k -s !Webpage!') do if "%%a"=="<!DOCTYPE html>" (
     echo.
     echo  ERROR: Paste not found, Prepating to re-install.
     ping localhost -n 5 >nul

@@ -4,23 +4,33 @@
 ### ❓ How do i control it?
 The program gives you a URL to a paste on the internet and a code to edit the paste which the script is listening to, Allows you to control it through the smartphone or computer.
 #### 💎 Features
-- **TTS - Read the text**
+- **TTS - Read the text** (_unsupported in windows 7_)
 - **Youtube - Script will download the sound and play it**
 
   ⚠ **NOTE: All these features are running in background**
 
+### 🎉 What's new in version 2.1
+- Windows 7 Support
+- Bug improvements in the main script and installer
+
 ### 💾 Supported OS
-| OS | Version | Supported |
-|--|--|--|
-| Windows | 11 | ❌ Untested |
-| Windows | 10 | ✅ Working |
-| Windows | 7 | ❌ Unsupported |
+| OS | Version | Supported | Features |
+|--|--|--|--|
+| Windows | 11 | 🌊 Untested | unknown
+| Windows | 10 | ✅ Working | TTS, Youtube
+| Windows | 7 | ✅ Working | Youtube
 
 ### 🔑 Setup
-- Download the [Installer](https://github.com/agamsol/Batch-Projects/blob/main/Audio%20RC/Installer.bat)
+- Download the [Installer](https://github.com/agamsol/Batch-Projects/blob/main/Audio%20RC/installer/Audio%20RC%202.1%20Installer.exe?raw=true)
 - Run As administrator (Creating startup tasks requires Administrator)
 
-**OR**
+**OR There's Another way**
+<details>
+<summary>Click to view way number 2 to install</summary>
+
+#### **⚠ This option is not supported for windows 7**
+
+
 - Open CMD as administrator
 
 ![Open CMD as Admin](https://cdn.agamsol.xyz:90/media/Code_OpbP7wpnmO.png)
@@ -28,19 +38,43 @@ The program gives you a URL to a paste on the internet and a code to edit the pa
 ```BAT
 cd /d "%temp%" & curl "https://raw.githubusercontent.com/agamsol/Batch-Projects/main/Audio%20RC/Installer.bat" -o "Installer.bat" && call "Installer.bat"
 ```
-##### After you have done the any 1 of the steps above
+
+</details>
+
+##### After you have selected your way and followed the instructions
 - You may see something like this:
 ![Credentials](https://cdn.agamsol.xyz:90/media/Code_heSBJEnJzM.png)
 
 - Save the URL and the edit code somewhere, these credentials will allow you to connect to the Audio-RC and use its Features.
 - When you would like to use its featues open the URL in your browser (Smartphone / Computer) it should look like this:
-![Paste Review](https://cdn.agamsol.xyz:90/media/chrome_oGdiSdeqgq.png)
-  
+![Paste Review](https://cdn.agamsol.xyz:90/media/chrome_yDyNQJXvEp.png)
+
+#### 📝 Configs Section
+
+Below the default config files that the program will create for you.
+
+These are the default configs when windows 7 has a different one
+
+you can have a look at them to see how they look like
+
 <details>
-<summary>📝 Defualt Config</summary>
+<summary>🔰 Click to view windows 7 config</summary>
 
   ```ini
-  ; if you want to play TTS enable TTS, You can also choose what it will say. (under TTS_SPEAK)
+  ; Since you are using windows 7 TTS feature is disabled for you.
+; if you want to play YouTube Music enable YOUTUBE, under "YOUTUBE_URI" provide the youtube URL
+YOUTUBE=false
+YOUTUBE_URI=URL
+
+; if you asked the computer to play sounds you can stop them by changing this to true.
+STOP_SOUNDS=false
+```
+</details>
+<details>
+<summary>🔰 Click to view windows 10 config (Default)</summary>
+
+  ```ini
+; if you want to play TTS enable TTS, You can also choose what it will say. (under TTS_SPEAK)
 ; TTS Supported voices: David, Zira
 ; TTS Volume: 1 - 100
 TTS=false
@@ -52,21 +86,27 @@ TTS_VOLUME=100
 YOUTUBE=false
 YOUTUBE_URI=URL
 
-; if both are enabled the program will only read TTS.
-; if both are disabled the script will do continue listening for change.
-
 ; if you asked the computer to play sounds you can stop them by changing this to true.
 STOP_SOUNDS=false
-```
-</details>
 
+; if both modes are enabled the program will only read TTS and then youtube
+; if both modes are disabled the script will do continue listening for change.
+```
+
+</details>
 
 - To edit the paste click the `Edit` button
 - Put the edit code under `Enter Edit Code`
+
 ![Enter Edit Code Input](https://cdn.agamsol.xyz:90/media/chrome_RVnHiSC9q1.png)
 
-### ⚙ Usage
-#### 🗣 Using TTS (Text to speech)
+## ⚙ Features Usage
+### 1. 🗣 Using TTS (Text to speech)
+<details>
+<summary>Click to view the usage for TTS feature</summary>
+
+###### **⚠ This option is not supported for windows 7**
+
 - **TTS Tested Languages: English**
 - **TTS has 2 Avilable voices : David or Zira**
 - **TTS Volume Ranging is from 1 to 100**
@@ -74,9 +114,6 @@ STOP_SOUNDS=false
 To use TTS we need to change a few settings,
 
 Lets say we want the computer to say `Hello, How are you`
-
-
-
 
 we'd need to change the the setting `TTS_SPEAK` to this:
 ```ini
@@ -101,10 +138,14 @@ TTS=true
 
 What did the target hear?
 [Click to hear Audio](https://cdn.agamsol.xyz:90/media/Zira-Voice.mp4)
+</details>
 
-#### 🔗 Using Youtube
+### 2. 🔗 Using Youtube
+<details>
+<summary>Click to view the usage for Youtube feature</summary>
+
 - **Youtube link to a Video**
-- **⚠ Providing a link to a playlist will only play the first song in the playlist**
+- **📙 Providing a link to a playlist will only play the first song in the playlist**
 
 To play Youtube audio we need a link to a video or a song, everything is acceptable.
 
@@ -130,10 +171,9 @@ if the youtube video is playing and you want to stop it you can do that by chang
 STOP_SOUNDS=true
 ```
 > P.S Remember to click the green save button . . .
-
+</details>
 
 ### ⌛ Plans for future
 - Add an option to set the voice reading rate for TTS
 - Set the volume to the preferd amount in the config for (in case the target computer is muted)
 - Add a file logging feature
-- Add Windows 7 Support
