@@ -16,7 +16,7 @@ The program gives you a URL to a paste on the internet and a code to edit the pa
 ### 💾 Supported OS
 | OS | Version | Supported | Features |
 |--|--|--|--|
-| Windows | 11 | 🌊 Untested | unknown
+| Windows | 11 | ✅ Working | unknown
 | Windows | 10 | ✅ Working | TTS, Youtube
 | Windows | 7 | ✅ Working | Youtube
 
