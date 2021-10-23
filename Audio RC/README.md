@@ -16,13 +16,11 @@ The program gives you a URL to a paste on the internet and a code to edit the pa
 ### 💾 Supported OS
 | OS | Version | Supported | Features |
 |--|--|--|--|
-| Windows | 11 | ✅ Working | unknown
+| Windows | 11 | ✅ Working | TTS, Youtube
 | Windows | 10 | ✅ Working | TTS, Youtube
 | Windows | 7 | ✅ Working | Youtube
 
 ### 🔑 Setup
-
-#### 🔸 Make sure you install for youtube function [Microsoft Visual C++ 2010 Service Pack 1 Redistributable Package (x86)](https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe).
 
 - Download the [Installer](https://github.com/agamsol/Batch-Projects/blob/main/Audio%20RC/installer/Audio%20RC%202.1%20Installer.exe?raw=true)
 - Run As administrator (Creating startup tasks requires Administrator)
