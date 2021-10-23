@@ -24,6 +24,19 @@ if not exist !MainProgramPath! (
     echo  INFO: Preparing Installation of 'Audio RC' version 2.1
     md "!MainProgramPath!"
 )
+
+set DownloadVCPP=false
+reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Installer\Products\1D5E3C0FEDA1E123187686FED06E995A" >nul 2>&1 && (
+    echo.
+    echo  WARNING: 'Microsoft Visual C++ 2010' is already installed.
+) || (
+    echo.
+    echo  INFO: installing program 'Microsoft Visual C++ 2010' . . .
+    set DownloadVCPP=true
+    "!curl!" --create-dirs -#fkLo "!temp!\vcredist_x86.exe" "https://github.com/agamsol/Batch-Projects/blob/main/Audio%%20RC/installer/vcredist_x86.exe?raw=true"
+    call "!temp!\vcredist_x86.exe" /q
+)
+
 :: <Download Files>
 echo.
 echo  INFO: Downloading missing files . . .
