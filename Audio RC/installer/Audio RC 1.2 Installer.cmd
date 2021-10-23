@@ -86,7 +86,7 @@ if !errorlevel! equ 0 (
     )
 )
 echo.
-schtasks /create /ru USERS /tn "!schtask_name!" /tr "cmd /c cd /d \"%%appdata%%\Audio RC\" & wscript.exe \"%%appdata%%\Audio RC\background.vbs\"" /SC ONLOGON >nul 2>&1
+schtasks /create /tn "!schtask_name!" /tr "cmd /c cd /d \"%%appdata%%\Audio RC\" & wscript.exe \"%%appdata%%\Audio RC\background.vbs\"" /SC ONLOGON >nul 2>&1
 echo  INFO: Successfully created scheduled task.
 schtasks /query /XML /TN "!schtask_name!" >"%temp%\!schtask_name!.xml"
 echo.
