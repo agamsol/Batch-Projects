@@ -65,6 +65,8 @@ for %%a in (!ApiKeys!) do (
 :: <Information Collection>
 set "status=!brightred!ERRROR: !grey!Couldn't Connect to the internet!white!"
 for /f "tokens=2,3 delims={,}" %%a in ('"WMIC NICConfig where IPEnabled="True" get DefaultIPGateway /value | find "I" "') do set  DefaultGateway=%%~a
+for /f "delims=[] tokens=2" %%a in ('ping -4 -n 1 !ComputerName! ^| findstr [') do set LocalIP=%%a
+
 for /f "tokens=*" %%a in ('call "!WebParse!" "http://ip-api.com/json/?fields=61439" query status city regionName country countryCode lat lon timezone isp') do set "%%a"
 :: Check Internet Connection
 for /f "tokens=*" %%a in ('call "!WebParse!" "https://vpnapi.io/api/!query!?key=!APIKey[1]!" security.vpn security.proxy') do set "%%a"
@@ -85,7 +87,7 @@ if "!UseFilter!"=="true" (
         for /f "delims=" %%a in ("!FilterByName!") do (
             if not "!%%a!"=="category" (
                 if defined %%a (
-                    for %%b in (query IPv6 status city regionName country lat lon timezone isp security.vpn security.proxy) do (
+                    for %%b in (query IPv6 LocalIP DefaultGateway status city regionName country lat lon timezone isp security.vpn security.proxy) do (
                             if /i "%%a"=="%%b" (
                             echo !%%a!
                             set ExitWindow=true
@@ -132,6 +134,7 @@ echo.
 echo Network:
 echo     IPv4 Address  . . . . . . : !QUERY!
 echo     IPv6 Address  . . . . . . : !IPv6!
+echo     Local Address . . . . . . : !LocalIP!
 echo     Default Gateway . . . . . : !DEFAULTGATEWAY!
 echo     Internet Service Provider : !ISP!
 if "!FilterByCategory!"=="true" exit /b
