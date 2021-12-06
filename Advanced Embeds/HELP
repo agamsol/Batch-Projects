@@ -1,0 +1,19 @@
+ Usage: index.bat [options...]
+    --help --> Display this help message
+    --webhook "<Webhook URL>" --> Specify the webhook where all messages will be sent
+    --current-timestamp --> Display embed's timestamp format, this can be stored and used for embed using string replacement
+    --attach-files "<Find String>:<Variable Name>" --> Files to attach to the discord messages. (remember the 8MB limit)
+    --replace "<Find String>:<Variable Name>" --> Replace a String in the message configuration. 
+    --URL "<RAW-LINK>" --> The URL for the message configuration. 
+          HAS TO BE RAW DATA, if this is not defined by you the program will see if you requested to send files only.
+    --raw-check false --> this option is set to true by default,
+          the URL validator system has a RAW system validator.
+          to disable it you need this flag.
+    --edit-message "<Message ID>" --> Edit a message instead of sending another one.
+          if the message does not exist the program will exit the process.
+          this can be bypassed using the '--force' flag which will send the message if it wasn't found.
+
+    NOTE: The order of the parameters is not matter.
+
+    type Y for more information.
+
