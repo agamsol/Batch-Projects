@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "webhook=https://discord.com/api/webhooks/862063271578566732/84cgOVpNwNnvto7cYpfjdACzLmRim0LkPCgprmnp9hS8W82hSFLyumNfbHduAxqSMLa_"
+set "webhook="
 
 
 : <Replace Strings Array>
