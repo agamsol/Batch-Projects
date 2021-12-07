@@ -12,6 +12,7 @@
     --edit-message "<Message ID>" --> Edit a message instead of sending another one.
           if the message does not exist the program will exit the process.
           this can be bypassed using the '--force' flag which will send the message if it wasn't found.
+    --Delete Messages that the webhook sent, This option requires to set webhook in each of the ways.
 
     NOTE: The order of the parameters is not matter.
 
