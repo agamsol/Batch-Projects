@@ -2,7 +2,7 @@
     --help --> Display this help message
     --webhook "<Webhook URL>" --> Specify the webhook where all messages will be sent
     --current-timestamp --> Display embed's timestamp format, this can be stored and used for embed using string replacement
-    --attach-files "<Find String>:<Variable Name>" --> Files to attach to the discord messages. (remember the 8MB limit)
+    --attach-files "<Find String>:<Variable Name>" --> Files to attach to the discord messages. (remember the 8MB limit).
     --replace "<Find String>:<Variable Name>" --> Replace a String in the message configuration. 
     --URL "<RAW-LINK>" --> The URL for the message configuration. 
           HAS TO BE RAW DATA, if this is not defined by you the program will see if you requested to send files only.
