@@ -1,4 +1,4 @@
-## 📨 Advanced Embeds Version 1.0 (BETA)
+## 📨 Advanced Embeds Version 1.1 (BETA)
 > Allow a batch script to send discord messages to a webhook.
 
 > 🔓 Open Source & Free for use
@@ -208,3 +208,6 @@ Or you can join my discord server here:
 > <a href="https://discord.gg/CnqSFMD9zK" rel="Discord Server">![Server](https://img.shields.io/discord/898195508231802931.svg?label=Discord&amp;colorB=7289DA)</a>
 
 ##### You better join my discord server instead as i dont accept friend requests
+
+### 🔔 Whats new in this version?
+- Fixed Wrong embed timestamps
