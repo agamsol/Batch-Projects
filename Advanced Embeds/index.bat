@@ -26,12 +26,9 @@ for /L %%a in (1 1 !Args.length!) do (
                 exit /b
                 )
                 if /i "%%~b"=="CURRENT-TIMESTAMP" (
-                    for /f %%A in ('wmic os get localdatetime /value ^| find /i "LocalDateTime"') do set "%%A"
-                    set hour=!LocalDateTime:~8,2!
-                    set /a hour=1!hour!-100, hour-=2
-                    set "hour=00!hour!"
-                    set "hour=!hour:~-2!"
-                    set "TIMESTAMP=!LocalDateTime:~0,4!-!LocalDateTime:~4,2!-!LocalDateTime:~6,2!T!hour!:!LocalDateTime:~10,2!:!LocalDateTime:~12,2!.!LocalDateTime:~15,3!Z"
+                    for /f "skip=2 tokens=2 delims==" %%A in ('wmic os get LocalDateTime /value') do for %%B in (%%A) do set "LocalDateTime=%%B"
+                    set /a "minutes=1!LocalDateTime:~22,3!-1000, hours=minutes/60+100, minutes=minutes%%60+100"
+                    set "TIMESTAMP=!LocalDateTime:~0,4!-!LocalDateTime:~4,2!-!LocalDateTime:~6,2!T!LocalDateTime:~8,2!:!LocalDateTime:~10,2!:!LocalDateTime:~12,2!.!LocalDateTime:~15,7!!hours:~1!:!minutes:~1!"
                     if not defined Arg[%%c] (echo TIMESTAMP=!TIMESTAMP!) else echo !Arg[%%c]!=!TIMESTAMP!
                     exit /b
                 )
