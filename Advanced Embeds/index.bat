@@ -13,8 +13,10 @@ for %%a in (%*) do (
     set Arg[!Args.length!]=%%~a
 )
 
+echo.%* | findstr /ic:"--batch">nul && set BatchMode=true
+
 for /L %%a in (1 1 !Args.length!) do (
-    for %%b in ("help" "current-timestamp" "webhook" "attach-files" "url" "replace" "edit-message" "delete-message") do (
+    for %%b in ("help" "current-timestamp" "webhook" "attach-files" "url" "replace" "edit-message" "delete-message" "batch") do (
         if /i "!Arg[%%a]!"=="--%%~b" (
             set queueArg=%%a
             set /a queueArg+=1
@@ -42,7 +44,9 @@ for /L %%a in (1 1 !Args.length!) do (
                     if defined Arg[%%c] (
                         call :NumberValidator "!Arg[%%c]!"
                         if defined NotNumber (
-                            echo ERROR: Invalid Message ID Provided.
+                            if "!BatchMode!"=="true" (
+                                echo ERROR=Invalid Message ID
+                            ) else echo ERROR: Invalid Message ID Provided.
                             exit /b
                         )
                         set DeleteMessageMode=true
@@ -66,11 +70,11 @@ for /L %%a in (1 1 !Args.length!) do (
                         curl --raw -Lf "!Arg[%%c]!" >nul 2>&0 && (
                             set AttachEmbedConfiguration=true
                         ) || (
-                            echo ERROR: Embed Configuration couldn't be found.
+                            if "!BatchMode!"=="true" (
+                                echo ERROR=Couldn't Find Embed Configuration
+                            ) else echo ERROR: Embed Configuration couldn't be found.
                             exit /b
                         ) 
-                    ) else (
-                        echo ERROR: Embed Configuration URL has not been provided, Checking for files to attach.
                     )
                 )
                 if /i "%%~b"=="REPLACE" (
@@ -86,7 +90,9 @@ for /L %%a in (1 1 !Args.length!) do (
                     if defined Arg[%%c] (
                         call :NumberValidator "!Arg[%%c]!"
                         if defined NotNumber (
-                            echo WARN: Invalid Message ID Provided.
+                            if "!BatchMode!"=="true" (
+                                echo ERROR=Invalid Message ID.
+                            ) else echo WARN: Invalid Message ID Provided.
                             exit /b
                         )
                         set EditMessageMode=true
@@ -99,21 +105,27 @@ for /L %%a in (1 1 !Args.length!) do (
 )
 if not defined ValidWebhook set ValidWebhook=null
 if "!ValidWebhook!"=="null" if defined webhook call :WebhookCheck "!webhook!"
-if "!ValidWebhook!"=="null" (
-    echo ERROR: Webhook not provided
-    exit /b
+
+for %%a in (null false) do (
+    if "!ValidWebhook!"=="%%a" (
+        if "!BatchMode!"=="true" (
+            echo ERROR=Invalid Webhook
+        ) else echo ERROR: Webhook not provided
+        exit /b
+    )
 )
-if "!ValidWebhook!"=="false" (
-    echo ERROR: Invalid Webhook URL Provided.
-    exit /b
-)
+
 if "!DeleteMessageMode!"=="true" (
     curl -sL "!WSWebhook!\messages\!MessageID!" | findstr /c:"{\"message\": \"Unknown Message\"">nul && (
-        echo ERROR: Couldn't find message with such ID.
+        if "!BatchMode!"=="true" (
+            echo ERROR=Invalid Message ID
+        ) else echo ERROR: Couldn't find message with such ID.
         exit /b
     )
     curl -X DELETE "!WSWebhook!\messages\!MessageID!">nul
-    echo The message with the ID '!MessageID!' has been successfully deleted.
+    if "!BatchMode!"=="true" (
+        echo MessageDeleted=Successfully Deleted Message "!MessageID!".
+    ) else echo The message with the ID '!MessageID!' has been successfully deleted.
     exit /b
 )
 
@@ -121,7 +133,9 @@ if "!EditMessageMode!"=="true" (
     REM CHECK IF MESSAGE EXISTS
     echo %* | findstr /ic:"--force">nul && set ForceSend=true
     curl -sL "!WSWebhook!\messages\!MessageID!" | findstr /c:"{\"message\": \"Unknown Message\"">nul && (
-        echo ERROR: Couldn't find message with such ID.
+        if "!BatchMode!"=="true" (
+            echo ERROR=Couldn't Find Message Specified
+        ) else echo ERROR: Couldn't find message with such ID.
         if not "!ForceSend!"=="true" exit /b
         goto :SendOverAllMessage
     )
@@ -134,7 +148,9 @@ if "!AttachEmbedConfiguration!"=="true" (
     curl --ssl-no-revoke -sL "!URLValue!" -o "!Configuration!"
     echo.%*| findstr /ic:"--raw-check false">nul || (
         echo.!URLValue!| findstr /c:"raw">nul || (
-            echo WARN: The URL provided seemed to not be a RAW page, disable raw checking using '--raw-check false'.
+            if "!BatchMode!"=="true" (
+                echo WARN=Raw-Link detected
+            ) else echo WARN: The URL provided seemed to not be a RAW page, disable raw checking using '--raw-check false'.
             if exist "!Configuration!" del /s /q "!Configuration!">nul
             exit /b
         )
@@ -143,7 +159,9 @@ if "!AttachEmbedConfiguration!"=="true" (
     
     call :NumberValidator "!ReplaceAmount!"
     if defined NotNumber (
-        echo ERROR: Failed to validate 'replace' flag's META-DATA.
+        if "!BatchMode!"=="true" (
+            echo ERROR=Invalid METADATA for "Replace" Feature.
+        ) else echo ERROR: Failed to validate 'replace' flag's META-DATA.
         exit /b
     )
     if !ReplaceAmount! neq 0 (
@@ -174,18 +192,25 @@ if "!ForceSending!"=="true" (
         if exist "!Configuration!" del /s /q "!Configuration!">nul
         call :NumberValidator "!CurlOutput:~8,18!"
         if defined NotNumber (
-            echo ERROR: An error occured while sending the message.
+            if "!BatchMode!"=="true" (
+                echo ERROR=Error occured while sending the message.
+            ) else echo ERROR: An error occured while sending the message.
             exit /b
         )
         echo Message Successfully Sent: !CurlOutput:~8,18!
         echo.%%a | findstr /c:"\"tts\": false">nul && (
-            echo Text to Speech: OFF
+            set TTS=false
         ) || (
-            echo Text to Speech: ON
+            set TTS=true
         )
+        if "!BatchMode!"=="true" (
+            echo TTS=!TTS!
+        ) else echo Text to Speech: !TTS!
     )
 ) else (
-    echo WARN: Nothing to send.
+    if "!BatchMode!"=="true" (
+        echo WARN=Nothing To Send
+    ) else echo WARN: Nothing to send.
 )
 exit /b
 : <Webhook Validation>
@@ -209,7 +234,9 @@ exit /b
 :AttachFiles
 call :NumberValidator "!FilesAmount!"
 if defined NotNumber (
-    echo ERROR: Failed to validate 'attach-files' flag's META-DATA.
+    if "!BatchMode!"=="true" (
+    echo ERROR=Invalid METADATA for "attach-files" Feature.
+    ) else echo ERROR: Failed to validate 'attach-files' flag's META-DATA.
     exit /b
 )
 if !FilesAmount! neq 0 (
@@ -217,7 +244,9 @@ if !FilesAmount! neq 0 (
         if defined !FilesVariableName![%%a] (
             for /f "delims=" %%b in ("!FilesVariableName!") do (
                 if not exist "!%%b[%%a]!" (
-                    echo ERROR: File to attach was not found '!%%b[%%a]!'
+                    if "!BatchMode!"=="true" (
+                        echo ERROR=File To Attach Not Found "!%%b[%%a]!".
+                    ) else echo ERROR: File to attach was not found '!%%b[%%a]!'
                 ) else (
                     set /a AttachFiles+=1
                     set "QueueFiles=!QueueFiles! -F "File[!AttachFiles!]=@!%%b[%%a]!""

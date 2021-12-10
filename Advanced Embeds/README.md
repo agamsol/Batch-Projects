@@ -1,4 +1,4 @@
-## 📨 Advanced Embeds Version 1.1 (BETA)
+## 📨 Advanced Embeds Version 1.2 (BETA)
 > Allow a batch script to send discord messages to a webhook.
 
 > 🔓 Open Source & Free for use
@@ -26,6 +26,8 @@
 | `--raw-check false` | this option is set to `true` by default, the URL validator system has a RAW system validator. to disable it you need this flag. |
 | `--edit-message "<Message ID>"` | Edit a message instead of sending another one. if the message does not exist the program will exit the process. this can be bypassed using the `--force` flag which will send the message if it wasn't found |
 | `--delete-message "<Message ID>"` | Delete Messages that the webhook sent, This option requires to set webhook in each of the ways. |
+| `--batch` | Will Return batch `Set` format, Bad Prefixes: `ERROR`, `WARN` |
+
 - **`--attach-files` Usage**
 <details>
   <summary>Click this for more information</summary>
@@ -210,4 +212,5 @@ Or you can join my discord server here:
 ##### You better join my discord server instead as i dont accept friend requests
 
 ### 🔔 Whats new in this version?
-- Fixed Wrong embed timestamps
+- 1.1 Fixed Wrong embed timestamps
+- 1.2 Added `--batch` output feature _(Script Support)_
