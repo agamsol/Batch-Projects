@@ -197,7 +197,9 @@ if "!ForceSending!"=="true" (
             ) else echo ERROR: An error occured while sending the message.
             exit /b
         )
-        echo Message Successfully Sent: !CurlOutput:~8,18!
+        if "!BatchMode!"=="true" (
+            echo MessageSentID=!CurlOutput:~8,18!
+        ) else echo Message Sent: !CurlOutput:~8,18!
         echo.%%a | findstr /c:"\"tts\": false">nul && (
             set TTS=false
         ) || (
