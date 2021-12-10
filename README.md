@@ -12,7 +12,7 @@
 | [Router Info (Custom Command)](https://github.com/agamsol/Batch-Projects/tree/main/Router-Info) | 1.0.1 | ✅ | ❌ | 10/10 |
 | [Discord-Message-Sender](https://github.com/agamsol/Batch-Projects/tree/main/Discord-Message-Sender) | 2.0 | :x: | ❌ | 10/10 |
 | [Audio RC](https://github.com/agamsol/Batch-Projects/tree/main/Audio%20RC) | 1.0 | ✅ | ✅ | 3/10 | Turns that this is not as stable as i thought |
-| [Advanced Embeds](https://github.com/agamsol/Batch-Projects/tree/main/Advanced%20Embeds) __(Based on project Discord-Message-Sender)__ | 2.1 | ✅ | ✅ | 8/10 | This is a pre version so i'd rate it 8/10, please report every bug |
+| [Advanced Embeds](https://github.com/agamsol/Batch-Projects/tree/main/Advanced%20Embeds) __(Based on project Discord-Message-Sender)__ | 1.2 | ✅ | ✅ | 8/10 | This is a pre version so i'd rate it 8/10, please report every bug |
 - **Stable Leveling:** The Rank for each project from 1/10 for being stable
 
 #### 📬 For any questions, Support or bug fixes feel free to join my discord server 
