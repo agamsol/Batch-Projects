@@ -17,4 +17,4 @@
 - **Stable Leveling:** The Rank for each project from 1/10 for being stable
 
 #### 📬 For any questions, Support or bug fixes feel free to join my discord server 
-> <a href="https://discord.gg/CnqSFMD9zK" rel="Discord Server">![Server](https://img.shields.io/discord/898195508231802931.svg?label=Discord&amp;colorB=7289DA)</a>
+> <a href="https://discord.gg/4TBWJa9dWC" rel="Discord Server">![Server](https://img.shields.io/discord/921795177939603478.svg?label=Discord&amp;colorB=7289DA)</a>
