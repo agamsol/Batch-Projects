@@ -1,0 +1,13 @@
+{
+    "Name": "Agam",
+    "Age": 17,
+    "setup": {
+        "keyboard": "Huntsman",
+        "mouse": "Basilisk Ultimate"
+    },
+    "Phone": {
+        "type": "iPhone",
+        "version": "iOS 15.0",
+        "model": "13 Pro Max"
+    }
+}
