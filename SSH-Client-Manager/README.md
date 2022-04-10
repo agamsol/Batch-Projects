@@ -13,7 +13,7 @@
 - When the operation ends you should have it installed
 
 ### ❓ Using the script
-- Download the [script]()
+- Download the [script](https://raw.githubusercontent.com/agamsol/Batch-Projects/main/SSH-Client-Manager/SSH%20Client%20Manager.bat)
 > _It's recommened that you will put the file in a folder on your deskop as the script must contain a config file._
 - Simply double click the file and open it
 
